@@ -2,12 +2,14 @@
 # ============================= #
 
 require_relative './contact.rb'
+require_relative './rolodex.rb'
 
 class CRM
 	attr_reader :name 
 
 	def initialize(name)
 		@name = name
+		@rolodex = Rolodex.new
 	end
 
 	def print_main_menu
@@ -30,7 +32,7 @@ class CRM
 		puts "\e[H\e[2J"
 		call_option(user_selected)
 		return if user_selected == 7
-		self.main_menu
+		main_menu
 	end
 
 	def call_option(user_selected)
@@ -54,8 +56,8 @@ class CRM
 		print "Enter Email Address: "
 		email = gets.chomp
 		print "Enter a Note: "
-		note = gets.chomp
-		contact = Contact.new(first_name, last_name, email, note)
+		note = gets.chomp 
+		@rolodex.add_contact(Contact.new(first_name, last_name, email, note))
 	end
 end
 
