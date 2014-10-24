@@ -25,14 +25,15 @@ class CRM
 	end
 
 	def main_menu
-		puts "What would you like to do?"
-		puts
-		print_main_menu
-		user_selected = gets.chomp.to_i
-		puts "\e[H\e[2J"
-		call_option(user_selected)
-		return if user_selected == 7
-		main_menu
+		loop do
+			puts "What would you like to do?"
+			puts
+			print_main_menu
+			user_selected = gets.chomp.to_i
+			puts "\e[H\e[2J"
+			call_option(user_selected)
+			break if user_selected == 7
+		end
 	end
 
 	def call_option(user_selected)
@@ -69,11 +70,39 @@ class CRM
 			puts "Contact Name: #{contact.first_name} #{contact.last_name}"
 			puts "Email: #{contact.email}"
 			puts "Notes: #{contact.note}"
+			puts "User ID: #{contact.id}"
 			puts
 		end
 	end
+
+	# USER_SELECTED = 2
+
+	def modify_contact
+		puts "Which contact do you wish to modify?: "
+		puts "Identify by First Name [1], Last Name [2] or User ID [3] "
+		puts "Enter number choice:"
+		number = gets.chomp.to_i
+		if number == 1
+			#by first name
+		elsif number == 2
+			#by last name
+		elsif number == 3
+			#by ID
+		else
+			puts "Invalid Input"
+
+
+	end
+
+	def self.run
+		puts "\e[H\e[2J"
+		crm = CRM.new("Our CRM")
+		crm.main_menu
+	end
 end
 
-puts "\e[H\e[2J"
-crm = CRM.new("Our CRM")
-crm.main_menu
+
+
+
+CRM.run
+
