@@ -4,7 +4,7 @@
 require_relative './contact.rb'
 
 class CRM
-	attr_reader :name
+	attr_reader :name 
 
 	def initialize(name)
 		@name = name
@@ -23,12 +23,14 @@ class CRM
 	end
 
 	def main_menu
-	  puts "What would you like to do?"
-	  puts
-	  print_main_menu
-	  user_selected = gets.chomp.to_i
-	  puts "\e[H\e[2J"
-	  call_option(user_selected)
+		puts "What would you like to do?"
+		puts
+		print_main_menu
+		user_selected = gets.chomp.to_i
+		puts "\e[H\e[2J"
+		call_option(user_selected)
+		return if user_selected == 7
+		self.main_menu
 	end
 
 	def call_option(user_selected)
