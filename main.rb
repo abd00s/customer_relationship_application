@@ -48,6 +48,8 @@ class CRM
 		end
 	end
 
+	# USER_SELECTED = 1
+
 	def add_new_contact
 		print "Enter First Name: "
 		first_name = gets.chomp
@@ -58,6 +60,17 @@ class CRM
 		print "Enter a Note: "
 		note = gets.chomp 
 		@rolodex.add_contact(Contact.new(first_name, last_name, email, note))
+	end
+
+	# USER_SELECTED = 5
+
+	def display_all_contacts	
+		@rolodex.contacts.each do |contact|
+			puts "Contact Name: #{contact.first_name} #{contact.last_name}"
+			puts "Email: #{contact.email}"
+			puts "Notes: #{contact.note}"
+			puts
+		end
 	end
 end
 
