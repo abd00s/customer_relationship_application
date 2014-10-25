@@ -81,13 +81,16 @@ class CRM
 	# USER_SELECTED = 2
 
 	def modify_contact
-		display_all_contacts
-		puts "Which contact do you wish to modify? Enter user ID:"
-		contact_to_mod = gets.chomp.to_i
-		this_contact = you_have_selected(contact_to_mod)
-		puts "You have selected #{this_contact.first_name} #{this_contact.last_name}"
-		puts "Confirm selection? (y/n)"
-			
+		loop do	
+			display_all_contacts
+			puts "Which contact do you wish to modify? Enter user ID:"
+			contact_to_mod = gets.chomp.to_i
+			this_contact = you_have_selected(contact_to_mod)
+			puts "You have selected #{this_contact.first_name} #{this_contact.last_name}"
+			puts "Confirm selection? (y/n)"
+			y_or_no = gets.chomp
+			break if y_or_no == "y"
+		end		
 		
 
 	end 
