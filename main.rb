@@ -86,18 +86,31 @@ class CRM
 			puts "Which contact do you wish to modify? Enter user ID:"
 			contact_to_mod = gets.chomp.to_i
 			this_contact = you_have_selected(contact_to_mod)
+			puts "\e[H\e[2J"
 			puts "You have selected #{this_contact.first_name} #{this_contact.last_name}"
 			puts "Confirm selection? (y/n)"
 			y_or_no = gets.chomp
 			break if y_or_no == "y"
 		end		
-		
-
+		modify_contact_menu
+		at_to_mod = gets.chomp.to_i
+		puts "\e[H\e[2J"
+		puts "you have selected #{at_to_mod}"
 	end 
 
 	def you_have_selected(id)
 		@rolodex.contacts.each {|contact| return contact if contact.id == id}
 
+	end
+
+
+	def modify_contact_menu
+		puts "\e[H\e[2J"
+		puts "What attribute do you wish to modify?"
+		puts "[1] First Name"
+		puts "[2] Last Name"
+		puts "[3] E-mail"
+		puts "[4] Note"
 	end
 
 	# USER_SELECTED = 3
