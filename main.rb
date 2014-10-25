@@ -31,8 +31,11 @@ class CRM
 			print_main_menu
 			user_selected = gets.chomp.to_i
 			puts "\e[H\e[2J"
+			if user_selected == 7 
+				puts "Thank you for using Rolodex!"
+				break 
+			end 
 			call_option(user_selected)
-			break if user_selected == 7
 		end
 	end
 
@@ -78,21 +81,57 @@ class CRM
 	# USER_SELECTED = 2
 
 	def modify_contact
-		puts "Which contact do you wish to modify?: "
-		puts "Identify by First Name [1], Last Name [2] or User ID [3] "
-		puts "Enter number choice:"
-		number = gets.chomp.to_i
-		if number == 1
-			#by first name
-		elsif number == 2
-			#by last name
-		elsif number == 3
-			#by ID
-		else
-			puts "Invalid Input"
+		display_all_contacts
+		puts "Which contact do you wish to modify? Enter user ID:"
+		contact_to_mod = gets.chomp.to_i
+		this_contact = you_have_selected(contact_to_mod)
+		puts "You have selected #{this_contact.first_name} #{this_contact.last_name}"
+		puts "Confirm selection? (y/n)"
+			
+		
 
+	end 
+
+	def you_have_selected(id)
+		@rolodex.contacts.each {|contact| return contact if contact.id == id}
 
 	end
+
+	# USER_SELECTED = 3
+	def delete_contact
+
+	end
+
+	# USER_SELECTED = 4
+	def display_contact
+		
+	end
+
+	# USER_SELECTED = 6
+	def display_contact_by_attr
+
+	end
+
+	# def selector
+	# 	puts "Identify by First Name [1], Last Name [2] or User ID [3] "
+	# 	puts "Enter number choice:"
+	# 	number = gets.chomp.to_i
+	# 	if number == 1
+	# 		puts "Which user?"
+	# 		inp = gets.chomp
+	# 		@rolodex.contacts.each do |contact|
+	# 			if inp == contact.first_name
+	# 				return contact
+	# 			end
+	# 		end
+	# 	elsif number == 2
+	# 		puts "were searching by ln"
+	# 	elsif number == 3
+	# 		puts "were searching by id"
+	# 	else
+	# 		puts "Invalid Input"
+	# 	end
+	# end
 
 	def self.run
 		puts "\e[H\e[2J"
