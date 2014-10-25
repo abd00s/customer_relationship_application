@@ -16,7 +16,7 @@ class CRM
 	  puts "[1] Add a new contact"
 	  puts "[2] Modify an existing contact"
 	  puts "[3] Delete a contact"
-	  puts "[4] Display contact"
+	  puts "[4] Display contact (by ID)"
 	  puts "[5] Display all the contacts"
 	  puts "[6] Display an attribute"
 	  puts "[7] Exit"
@@ -44,7 +44,7 @@ class CRM
 		when 1 then add_new_contact
 		when 2 then modify_contact
 		when 3 then delete_contact
-		when 4 then display_contact
+		when 4 then puts "Enter ID:"; display_contact(gets.chomp.to_i)
 		when 5 then display_all_contacts
 		when 6 then display_by_attribute
 		when 7 then puts "Thank you for using Rolodex!"; return
@@ -82,6 +82,7 @@ class CRM
 
 	def modify_contact
 		this_contact = ""
+		contact_to_mod = 0
 		loop do	
 			display_all_contacts
 			puts "Which contact do you wish to modify? Enter user ID:"
@@ -89,6 +90,7 @@ class CRM
 			this_contact = you_have_selected(contact_to_mod)
 			puts "\e[H\e[2J"
 			puts "You have selected #{this_contact.first_name} #{this_contact.last_name}"
+			puts
 			puts "Confirm selection? (y/n)"
 			y_or_no = gets.chomp
 			break if y_or_no == "y"
@@ -103,7 +105,8 @@ class CRM
 		this_contact.send("#{at_to_mod}=", new_val)
 		puts "\e[H\e[2J"
 		puts "Value succesfully changed."
-		# display_contact(cont_to_mod)
+		puts
+		display_contact(contact_to_mod)	
 	end 
 
 	def you_have_selected(id)
@@ -127,8 +130,17 @@ class CRM
 	end
 
 	# USER_SELECTED = 4
-	def display_contact(id)
-		
+	def display_contact(user_id)
+		puts
+		@rolodex.contacts.each do |contact|
+			if contact.id == user_id
+				puts "Contact Name: #{contact.first_name} #{contact.last_name}"
+				puts "Email: #{contact.email}"
+				puts "Notes: #{contact.note}"
+				puts "User ID: #{contact.id}"
+				puts
+			end
+		end
 	end
 
 	# USER_SELECTED = 6
