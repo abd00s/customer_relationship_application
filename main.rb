@@ -81,6 +81,7 @@ class CRM
 	# USER_SELECTED = 2
 
 	def modify_contact
+		this_contact = ""
 		loop do	
 			display_all_contacts
 			puts "Which contact do you wish to modify? Enter user ID:"
@@ -95,7 +96,14 @@ class CRM
 		modify_contact_menu
 		at_to_mod = gets.chomp.to_i
 		puts "\e[H\e[2J"
-		puts "you have selected #{at_to_mod}"
+		out = ["first_name", "last_name", "email", "note"]
+		at_to_mod = out[at_to_mod.to_i - 1]
+		puts "Enter new value:"
+		new_val = gets.chomp
+		this_contact.send("#{at_to_mod}=", new_val)
+		puts "\e[H\e[2J"
+		puts "Value succesfully changed."
+		# display_contact(cont_to_mod)
 	end 
 
 	def you_have_selected(id)
@@ -119,7 +127,7 @@ class CRM
 	end
 
 	# USER_SELECTED = 4
-	def display_contact
+	def display_contact(id)
 		
 	end
 
