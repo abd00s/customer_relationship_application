@@ -126,7 +126,21 @@ class CRM
 
 	# USER_SELECTED = 3
 	def delete_contact
-
+		del_contact = ""
+		loop do	
+			display_all_contacts
+			puts "Which contact do you wish to delete? Enter user ID:"
+			contact_to_del = gets.chomp.to_i
+			del_contact = you_have_selected(contact_to_del)
+			puts "\e[H\e[2J"
+			puts "You have selected #{del_contact.first_name} #{del_contact.last_name}"
+			puts
+			puts "Confirm selection? (y/n)"
+			y_or_no = gets.chomp
+			break if y_or_no == "y"
+		end	
+		@rolodex.contacts.delete(del_contact)
+		puts "Contact removed successfully."
 	end
 
 	# USER_SELECTED = 4
@@ -148,26 +162,7 @@ class CRM
 
 	end
 
-	# def selector
-	# 	puts "Identify by First Name [1], Last Name [2] or User ID [3] "
-	# 	puts "Enter number choice:"
-	# 	number = gets.chomp.to_i
-	# 	if number == 1
-	# 		puts "Which user?"
-	# 		inp = gets.chomp
-	# 		@rolodex.contacts.each do |contact|
-	# 			if inp == contact.first_name
-	# 				return contact
-	# 			end
-	# 		end
-	# 	elsif number == 2
-	# 		puts "were searching by ln"
-	# 	elsif number == 3
-	# 		puts "were searching by id"
-	# 	else
-	# 		puts "Invalid Input"
-	# 	end
-	# end
+
 
 	def self.run
 		puts "\e[H\e[2J"
