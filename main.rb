@@ -158,10 +158,30 @@ class CRM
 	end
 
 	# USER_SELECTED = 6
-	def display_contact_by_attr
-
+	def display_by_attribute
+		display_by_attr_menu
+		sort_attr = gets.chomp.to_i
+		case sort_attr
+		when 1 
+			@rolodex.contacts.sort {
+				|contact1, contact2| contact1.first_name <=> contact2.first_name
+				}.each{|contact|  display_contact(contact.id)}
+		# when 2 then
+		# when 3 then
+		# when 4 then 
+		# when 5 then
+		end
 	end
 
+	def display_by_attr_menu
+		puts "\e[H\e[2J"
+		puts "Sort contacts by:"
+		puts "[1] First Name"
+		puts "[2] Last Name"
+		puts "[3] Email"
+		puts "[4] Note"
+		puts "[5] User ID"
+	end
 
 
 	def self.run
