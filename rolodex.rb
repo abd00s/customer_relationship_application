@@ -1,3 +1,5 @@
+# Creates a single Rolodex that stores all our contacts
+
 class Rolodex
   def initialize
     @contacts = []
